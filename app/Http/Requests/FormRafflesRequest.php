@@ -34,7 +34,7 @@ class FormRafflesRequest extends FormRequest
             case "POST":
                 return [
                     'name'       => 'required|min:5|max:100|unique:raffles',
-                    'raffle_url' => 'required|url',
+                    // 'raffle_url' => 'required|url',
                     'start_date' => 'required|date',
                     'end_date'   => 'required|date',
                 ];
@@ -44,7 +44,7 @@ class FormRafflesRequest extends FormRequest
             case "PATCH":
                 return [
                     'name'       => 'required|min:5|max:100',
-                    'raffle_url' => 'required|url',
+                    // 'raffle_url' => 'required|url',
                     'start_date' => 'required|date',
                     'end_date'   => 'required|date',
                 ];
@@ -63,7 +63,7 @@ class FormRafflesRequest extends FormRequest
     {
         $input = $this->all();
         $input['name']       = filter_var($input['name'], FILTER_SANITIZE_STRING);
-        $input['raffle_url'] = filter_var($input['raffle_url'], FILTER_SANITIZE_URL);
+        // $input['raffle_url'] = filter_var($input['raffle_url'], FILTER_SANITIZE_URL);
         $input['start_date'] = filter_var($input['start_date'], FILTER_SANITIZE_STRING);
         $input['end_date']   = filter_var($input['end_date'], FILTER_SANITIZE_STRING);
 

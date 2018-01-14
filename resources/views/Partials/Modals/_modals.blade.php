@@ -58,3 +58,28 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<div id="raffleEntriestModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Raffle Entries</h4>
+      </div>
+
+      <div class="modal-body">
+        <div id="raffle-entries-container">
+          <div class="row">
+              @include('Partials.Raffles._entries')
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="" class="btn btn-link" data-dismiss="modal">Close</button>
+        <!-- <button type="button" id="toggle-update" class="btn btn-primary">Update</button> -->
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

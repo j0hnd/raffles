@@ -40,7 +40,15 @@ class Raffle extends AppModel
             $object = self::where([ 'is_active' => 1, 'deleted_at' => null ]);
 
             if ($object->count()) {
-                $raffles = $object->get();
+                foreach ($object->get() as $i => $obj) {
+                    $raffles[$i]['raffle_id']   = $obj->raffle_id;
+                    $raffles[$i]['raffle_name'] = $obj->name;
+                    $raffles[$i]['raffle_url']  = $obj->raffle_url;
+                    $raffles[$i]['start_date']  = $obj->start_date;
+                    $raffles[$i]['end_date']    = $obj->end_date;
+                }
+
+                krsort($raffles);
             }
 
         } catch (\Exception $e) {

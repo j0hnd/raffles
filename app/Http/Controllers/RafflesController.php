@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Raffle;
+use Illuminate\Support\Facades\URL;
 
+use App\Raffle;
 use App\Http\Requests\FormRafflesRequest;
 
 
@@ -33,9 +34,15 @@ class RafflesController extends Controller
                 $form = $request->all();
 
                 if ($request->isMethod('post')) {
+
+                    // generate raffle url
+                    $raffle_name = str_replace(' ', '-', strtolower($form['name']));
+                    $base_url = str_replace("/raffle", "", URL::current());
+                    $url = URL::to('/')."/".$raffle_name;
+
                     $id = Raffle::create([
                         'name'       => $form['name'],
-                        'raffle_url' => $form['raffle_url'],
+                        'raffle_url' => $url,
                         'start_date' => $form['start_date'],
                         'end_date'   => $form['end_date'],
                     ]);
@@ -67,9 +74,14 @@ class RafflesController extends Controller
                     $raffle_info = Raffle::where(['raffle_id' => $form['id'], 'is_active' => 1]);
 
                     if ($raffle_info->count()) {
+                        // regenerate raffle url
+                        $raffle_name = str_replace(' ', '-', strtolower($form['name']));
+                        $base_url = str_replace("/raffle", "", URL::current());
+                        $url = URL::to('/')."/".$raffle_name;
+
                         $raffle = $raffle_info->first();
                         $raffle->name       = $form['name'];
-                        $raffle->raffle_url = $form['raffle_url'];
+                        $raffle->raffle_url = $url;
                         $raffle->start_date = $form['start_date'];
                         $raffle->end_date   = $form['end_date'];
 

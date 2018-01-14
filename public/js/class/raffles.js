@@ -13,6 +13,13 @@ $(function() {
         });
     });
 
+    $(document).on('click', '#toggle-raffle-entries', function(e) {
+        $('#raffleEntriestModal').modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+    });
+
     $(document).on('click', '#toggle-submit', function() {
         $.ajax({
             url: '/raffle',
@@ -21,6 +28,8 @@ $(function() {
             dataType: 'json',
             success: function(response) {
                 if (response.success) {
+                    $('#raffle-form')[0].reset();
+
                     $('.success-message-container').removeClass('hidden');
                     $('.success-message-container').find('.message').text(response.message);
                     setTimeout(function() {
@@ -67,7 +76,7 @@ $(function() {
 
         $('.modal-body').find('#id').val($(this).data('id'));
         $('.modal-body').find('#raffle-name').val($(this).data('name'));
-        $('.modal-body').find('#raffle-url').val($(this).data('url'));
+        // $('.modal-body').find('#raffle-url').val($(this).data('url'));
         $('.modal-body').find('#start-date').val($(this).data('start'));
         $('.modal-body').find('#end-date').val($(this).data('end'));
     });
@@ -80,6 +89,8 @@ $(function() {
             dataType: 'json',
             success: function(response) {
                 if (response.success) {
+                    $('#edit-raffle-form')[0].reset();
+
                     $('.success-message-container').removeClass('hidden');
                     $('.success-message-container').find('.message').text(response.message);
                     setTimeout(function() {

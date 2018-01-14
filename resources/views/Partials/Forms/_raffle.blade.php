@@ -4,10 +4,10 @@
         <input type="text" class="form-control" id="raffle-name" name="name" placeholder="Raffle Name">
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="raffle-url">Raffle URL</label>
         <input type="url" class="form-control" id="raffle-url" name="raffle_url" placeholder="Raffle URL">
-    </div>
+    </div> -->
 
     <div class="row">
         <div class="col-xs-5">
