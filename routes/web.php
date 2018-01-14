@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/logout', 'Auth\LoginController@logout');
-
-Route::match(['GET', 'POST'], '/login', 'Auth\LoginController@login')->name('login');
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/logout', 'Auth\LoginController@logout');
+    Route::get('/r/{raffle}/{raffle_id}', 'RaffleEntriesController@register')->name('register');
+    Route::match(['GET', 'POST'], '/login', 'Auth\LoginController@login')->name('login');
+});
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'RafflesController@index');

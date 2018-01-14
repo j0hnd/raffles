@@ -22,7 +22,7 @@ class RaffleEntry extends Model
 
     protected $guard = ['raffle_id', 'raffle_entry_id', 'action_id'];
 
-    protected $fillable = ['email', 'code'];
+    protected $fillable = ['raffle_id', 'email', 'code'];
 
     protected $dates = ['deleted_at', 'created_at', 'modified_at'];
 
@@ -32,12 +32,14 @@ class RaffleEntry extends Model
         parent::boot();
 
         self::creating(function ($model) {
-            $model->uid = Uuid::generate()->string;
+            $model->raffle_entry_id = Uuid::generate()->string;
         });
     }
 
     public static function get_raffle_entries($raffle_id, $entries_per_page)
     {
+        $data = null;
+
         try {
 
             $entries = self::select(DB::Raw('raffle_entries.raffle_entry_id, raffle_entries.email, raffle_entries.code, raffle_entries.created_at, actions.name AS action_name'))
@@ -51,9 +53,25 @@ class RaffleEntry extends Model
                         ->orderBy('raffle_entries.created_at', 'desc')
                         ->paginate($entries_per_page);
 
+            if ($entries->count()) {
+                $data = $entries->get();
+            }
+
         } catch (\Exception $e) {
             throw $e;
         }
 
+        return $data;
+    }
+
+    public static function get_raffle_entry($id)
+    {
+        $object = self::where('id', $id);
+        return $object->count() ? $object->first() : null;
+    }
+
+    public static function create_entry($form)
+    {
+        return self::create($form);
     }
 }

@@ -66,4 +66,9 @@ class Raffle extends AppModel
 
         return $results;
     }
+
+    public static function is_raffle_id_valid($raffle_id)
+    {
+        return self::where(['raffle_id' => $raffle_id, 'is_active' => 1, 'deleted_at' => null])->count() ? true : false;
+    }
 }

@@ -12,4 +12,14 @@ class RaffleAction extends Model
      * @var string
      */
     protected $table = "actions";
+
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function ($model) {
+            $model->action_id = Uuid::generate()->string;
+        });
+    }
 }
