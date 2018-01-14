@@ -1,15 +1,6 @@
 @extends('layouts.app')
 
 @section('main-content')
-<div class="row bg-primary padding-10 margin-top15 margin-bottom15">
-    <div class="col-md-6 text-left">
-        <button type="button" id="toggle-create-raffle" class="btn btn-link controls">Create Raffle</button>
-    </div>
-    <div class="col-md-6 text-right">
-        <button type="button" id="toggle-logout" class="btn btn-link controls">Logout</button>
-    </div>
-</div>
-
 <div class="row">
     <h1>Raffles</h1>
 </div>

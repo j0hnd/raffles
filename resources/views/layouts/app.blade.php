@@ -19,6 +19,17 @@
         <div id="app">
             <div class="container">
                 <section class="wrapper">
+                    @if (Auth::check())
+                    <div class="row bg-primary padding-10 margin-top15 margin-bottom15">
+                        <div class="col-md-6 text-left">
+                            <button type="button" id="toggle-create-raffle" class="btn btn-link controls">Create Raffle</button>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button type="button" id="toggle-logout" class="btn btn-link controls">Logout</button>
+                        </div>
+                    </div>
+                    @endif
+
                     @yield('main-content')
                 </section>
             </div><!-- ./wrapper -->
@@ -26,7 +37,8 @@
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-        <script src="{{ url('/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+        <!-- <script src="{{ url('/js/bootstrap-datepicker.js') }}" type="text/javascript"></script> -->
+        <script src="{{ url('/js/class/users.js') }}" type="text/javascript"></script>
         @yield('custom-js')
     </body>
 </html>

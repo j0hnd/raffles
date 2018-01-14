@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', 'RafflesController@index');
-Route::get('/raffle/reload/list', 'RafflesController@reload');
+
+
 Route::resource('raffle', 'RafflesController');
+
+Route::get('/logout', 'Auth\LoginController@logout');
+
+Route::match(['GET', 'POST'], '/login', 'Auth\LoginController@login')->name('login');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', 'RafflesController@index');
+    Route::get('/raffle/reload/list', 'RafflesController@reload');
+});
