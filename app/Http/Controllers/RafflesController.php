@@ -101,6 +101,38 @@ class RafflesController extends Controller
         return response()->json($response);
     }
 
+    public function destroy(FormRafflesRequest $request)
+    {
+        $response = ['success' => false];
+
+        try {
+
+            if ($request->ajax()) {
+
+                if ($request->isMethod('delete')) {
+
+                    $form = $request->all();
+
+                    $raffle_info = Raffle::where(['raffle_id' => $form['id']]);
+
+                    if ($raffle_info->count()) {
+                        $raffle_info->delete();
+
+                        $response = ['success' => true, 'message' => 'Raffle deleted!'];
+                    }
+
+                }
+
+            }
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
+
+        return response()->json($response);
+    }
+
     /**
      * Reload list of raffles
      *

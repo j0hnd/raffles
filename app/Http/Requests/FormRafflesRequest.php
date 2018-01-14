@@ -23,8 +23,6 @@ class FormRafflesRequest extends FormRequest
      */
     public function rules()
     {
-        $this->sanitize();
-
         switch ($this->method()) {
             case "GET":
             case "DELETE":
@@ -32,6 +30,7 @@ class FormRafflesRequest extends FormRequest
                 break;
 
             case "POST":
+                $this->sanitize();
                 return [
                     'name'       => 'required|min:5|max:100|unique:raffles',
                     // 'raffle_url' => 'required|url',
@@ -42,6 +41,7 @@ class FormRafflesRequest extends FormRequest
 
             case "PUT":
             case "PATCH":
+                $this->sanitize();
                 return [
                     'name'       => 'required|min:5|max:100',
                     // 'raffle_url' => 'required|url',

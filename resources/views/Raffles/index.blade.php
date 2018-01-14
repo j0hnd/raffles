@@ -19,9 +19,9 @@
         <thead>
             <tr>
                 <th class="col-md-3">Raffle Name</th>
-                <th class="col-md-3">Raffle URL</th>
-                <th class="col-md-2 text-center">Start Date</th>
-                <th class="col-md-2 text-center">End Date</th>
+                <th class="col-md-4">Raffle URL</th>
+                <th class="col-md-1 text-center">Start Date</th>
+                <th class="col-md-1 text-center">End Date</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>

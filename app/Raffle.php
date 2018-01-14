@@ -3,12 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Webpatser\Uuid\Uuid;
 use DB;
 
 
 class Raffle extends AppModel
 {
+    use SoftDeletes;
+
+
     /**
      * The table associated with the model.
      *
@@ -18,7 +22,7 @@ class Raffle extends AppModel
 
     protected $fillable = ['raffle_id', 'name', 'raffle_url', 'start_date', 'end_date'];
 
-    protected $dates = ['created_at', 'modified_at'];
+    protected $dates = ['start_date', 'end_date', 'deleted_at', 'created_at', 'modified_at'];
 
 
 

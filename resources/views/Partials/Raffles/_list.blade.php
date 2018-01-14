@@ -9,6 +9,7 @@
             <button type="button" id="toggle-edit-raffle" class="btn btn-primary" data-id="{{ $raffle['raffle_id'] }}" data-name="{{ $raffle['raffle_name'] }}" data-start="{{ $raffle['start_date'] }}" data-end="{{ $raffle['end_date'] }}">Edit</button>
             <button type="button" id="toggle-raffle-entries" class="btn btn-primary" data-id="{{ $raffle['raffle_id'] }}">Entries</button>
             <button type="button" id="toggle-draw-raffle" class="btn btn-success" data-id="{{ $raffle['raffle_id'] }}">Draw</button>
+            <button type="button" id="toggle-delete-raffle" class="btn btn-danger" data-id="{{ $raffle['raffle_id'] }}" data-name="{{ $raffle['raffle_name'] }}">Delete</button>
         </td>
     </tr>
     @endforeach
