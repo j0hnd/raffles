@@ -11,10 +11,6 @@
 |
 */
 
-
-
-Route::resource('raffle', 'RafflesController');
-
 Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::match(['GET', 'POST'], '/login', 'Auth\LoginController@login')->name('login');
@@ -22,4 +18,7 @@ Route::match(['GET', 'POST'], '/login', 'Auth\LoginController@login')->name('log
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'RafflesController@index');
     Route::get('/raffle/reload/list', 'RafflesController@reload');
+    Route::resource('raffle', 'RafflesController');
+
+    Route::get('/raffle-entries/{raffle_id}', 'RaffleEntriesController@get_raffle_entries');
 });

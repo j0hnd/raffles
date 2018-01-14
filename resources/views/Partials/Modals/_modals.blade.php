@@ -59,7 +59,7 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div id="raffleEntriestModal" class="modal fade" tabindex="-1" role="dialog">
+<div id="raffleEntriesModal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
 
@@ -70,7 +70,7 @@
       <div class="modal-body">
         <div id="raffle-entries-container">
           <div class="row">
-              @include('Partials.Raffles._entries')
+              @include('Partials.RaffleEntries._entries')
           </div>
         </div>
       </div>
@@ -94,7 +94,7 @@
 
       <div class="modal-body">
         @include('Partials.Common._flash')
-        
+
         <div id="raffle-entries-container">
           <div class="row">
             <div class="col-xs-12">

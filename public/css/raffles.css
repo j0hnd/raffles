@@ -91,3 +91,13 @@ body {
 .controls {
     color: #ffffff;
 }
+
+.table > tbody > tr > td {
+    vertical-align: middle !important;
+}
+
+.table > thead > tr > th {
+    background-color: #a9a9a9;
+    color: #ffffff;
+    text-transform: uppercase !important;
+}

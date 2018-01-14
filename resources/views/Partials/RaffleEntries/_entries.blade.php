@@ -8,7 +8,6 @@
         </thead>
 
         <tbody id="entries-list-container">
-
         </tbody>
     </table>
 </div>

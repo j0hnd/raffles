@@ -6,6 +6,11 @@ $(function() {
     //     format: 'mm/dd/yyyy'
     // });
 
+    $('.raffle-ended').tooltip({
+        placement: 'top',
+        title: 'This raffle is already ended.'
+    });
+
     $(document).on('click', '#toggle-create-raffle', function(e) {
         $('#raffleAddModal').modal({
             backdrop: 'static',
@@ -14,9 +19,18 @@ $(function() {
     });
 
     $(document).on('click', '#toggle-raffle-entries', function(e) {
-        $('#raffleEntriestModal').modal({
-            backdrop: 'static',
-            keyboard: false
+
+        $.ajax({
+            url: '/raffle-entries/' + $(this).data('id'),
+            dataType: 'json',
+            success: function (response) {
+                $('#raffleEntriesModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+
+                $('.modal-body').find('#entries-list-container').html(response.data.list);
+            }
         });
     });
 
@@ -41,6 +55,9 @@ $(function() {
         // $('.modal-body').find('#raffle-url').val($(this).data('url'));
         $('.modal-body').find('#start-date').val($(this).data('start'));
         $('.modal-body').find('#end-date').val($(this).data('end'));
+
+        console.log($(this).data('start'));
+        console.log($(this).data('end'));
     });
 
     $(document).on('click', '#toggle-delete', function() {

@@ -6,14 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
 use App\Raffle;
+use App\RaffleEntry;
 use App\Http\Requests\FormRafflesRequest;
 
 
 class RafflesController extends Controller
 {
-    protected $raffle_per_page = 20;
-
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -26,7 +24,7 @@ class RafflesController extends Controller
      */
     public function index()
     {
-        $raffles = Raffle::get_raffles($this->raffle_per_page);
+        $raffles = Raffle::get_raffles($this->per_page);
 
         return view('Raffles.index', compact('raffles'));
     }
@@ -154,7 +152,7 @@ class RafflesController extends Controller
         try {
 
             if ($request->ajax()) {
-                $raffles = Raffle::get_raffles($this->raffle_per_page);
+                $raffles = Raffle::get_raffles($this->per_page);
 
                 $list = view('Partials.Raffles._list', compact('raffles'))->render();
 
