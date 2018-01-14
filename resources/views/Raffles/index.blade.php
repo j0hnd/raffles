@@ -19,6 +19,13 @@
         <tbody id="raffle-list-container">
             @include('Partials.Raffles._list', compact('raffles'))
         </tbody>
+        @if (count($raffles))
+        <tfoot>
+            <tr>
+                <td colspan="5" class="text-right">{{ $raffles['object']->links() }}</td>
+            </tr>
+        </tfoot>
+        @endif
     </table>
 </div>
 

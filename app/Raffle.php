@@ -35,16 +35,19 @@ class Raffle extends AppModel
         });
     }
 
-    public static function get_raffles()
+    public static function get_raffles($item_per_page = 1)
     {
         $raffles = null;
+        $results = null;
 
         try {
 
-            $object = self::where([ 'is_active' => 1, 'deleted_at' => null ]);
+            $object = self::where([ 'is_active' => 1, 'deleted_at' => null ])
+                        ->orderBy('created_at', 'desc')
+                        ->paginate($item_per_page);
 
             if ($object->count()) {
-                foreach ($object->get() as $i => $obj) {
+                foreach ($object as $i => $obj) {
                     $raffles[$i]['raffle_id']   = $obj->raffle_id;
                     $raffles[$i]['raffle_name'] = $obj->name;
                     $raffles[$i]['raffle_url']  = $obj->raffle_url;
@@ -52,13 +55,13 @@ class Raffle extends AppModel
                     $raffles[$i]['end_date']    = $obj->end_date;
                 }
 
-                krsort($raffles);
+                $results = ['data' => $raffles, 'object' => $object];
             }
 
         } catch (\Exception $e) {
             throw $e;
         }
 
-        return $raffles;
+        return $results;
     }
 }

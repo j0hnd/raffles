@@ -1,5 +1,5 @@
-@if (count($raffles))
-    @foreach ($raffles as $raffle)
+@if (count($raffles['data']))
+    @foreach ($raffles['data'] as $raffle)
     <tr data-id="{{ $raffle['raffle_id'] }}">
         <td>{{ $raffle['raffle_name'] }}</td>
         <td>{{ $raffle['raffle_url'] }}</td>
