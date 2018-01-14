@@ -54,6 +54,41 @@ class RafflesController extends Controller
         return response()->json($response);
     }
 
+    public function update(FormRafflesRequest $request)
+    {
+        $response = ['success' => false];
+
+        try {
+            if ($request->ajax()) {
+
+                if ($request->isMethod('put')) {
+                    $form = $request->all();
+
+                    $raffle_info = Raffle::where(['raffle_id' => $form['id'], 'is_active' => 1]);
+
+                    if ($raffle_info->count()) {
+                        $raffle = $raffle_info->first();
+                        $raffle->name       = $form['name'];
+                        $raffle->raffle_url = $form['raffle_url'];
+                        $raffle->start_date = $form['start_date'];
+                        $raffle->end_date   = $form['end_date'];
+
+                        if ($raffle->save()) {
+                            $response = ['success' => true, 'message' => 'Raffle updated!'];
+                        }
+                    }
+                }
+
+            }
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
+
+        return response()->json($response);
+    }
+
     /**
      * Reload list of raffles
      *

@@ -4,7 +4,6 @@
 <div class="row bg-primary padding-10 margin-top15 margin-bottom15">
     <div class="col-md-6 text-left">
         <button type="button" id="toggle-create-raffle" class="btn btn-link controls">Create Raffle</button>
-        <button type="button" id="toggle-draw-winner" class="btn btn-link controls">Draw Winner</button>
     </div>
     <div class="col-md-6 text-right">
         <button type="button" id="toggle-logout" class="btn btn-link controls">Logout</button>
@@ -19,10 +18,11 @@
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th class="col-md-5">Raffle Name</th>
+                <th class="col-md-3">Raffle Name</th>
                 <th class="col-md-3">Raffle URL</th>
-                <th class="col-md-2">Start Date</th>
-                <th class="col-md-2">End Date</th>
+                <th class="col-md-2 text-center">Start Date</th>
+                <th class="col-md-2 text-center">End Date</th>
+                <th>&nbsp;</th>
             </tr>
         </thead>
         <tbody id="raffle-list-container">
