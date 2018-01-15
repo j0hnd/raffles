@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <!-- <link rel="stylesheet" href="{{ url('/css/bootstrap.min.css') }}"> -->
+        <link rel="stylesheet" href="{{ url('/css/bootstrap-datetimepicker.min.css') }}">
         <link rel="stylesheet" href="{{ url('/css/raffles.css') }}">
         @yield('custom-css')
     </head>
@@ -36,8 +38,10 @@
         </div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-        <!-- <script src="{{ url('/js/bootstrap-datepicker.js') }}" type="text/javascript"></script> -->
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" crossorigin="anonymous"></script>
+        <script src="{{ url('/js/plugins/bootstrap.min.js') }}" type="text/javascript"></script>
+        <script src="{{ url('/js/plugins/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
         <script src="{{ url('/js/class/users.js') }}" type="text/javascript"></script>
         @yield('custom-js')
     </body>

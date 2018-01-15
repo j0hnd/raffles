@@ -17,9 +17,10 @@ class CreateRaffles extends Migration
             $table->increments('id');
             $table->uuid('raffle_id')->unique();
             $table->string('name', 100);
-            $table->string('raffle_url', 255)->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
+            $table->string('slug', 255);
+            $table->text('description')->nullable();
+            $table->datetime('start_date')->nullable();
+            $table->datetime('end_date')->nullable();
             $table->tinyInteger('is_active')->default(1);
             $table->softDeletes();
             $table->timestamps();

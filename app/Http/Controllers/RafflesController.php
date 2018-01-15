@@ -41,16 +41,18 @@ class RafflesController extends Controller
 
                 if ($request->isMethod('post')) {
 
-                    // generate raffle url
-                    $raffle_name = str_replace(' ', '-', strtolower($form['name']));
-                    $base_url = str_replace("/raffle", "", URL::current());
-                    $url = URL::to('/')."/".$raffle_name;
+                    // generate slug
+                    $slug = str_replace(' ', '-', strtolower($form['name']));
+
+                    $start_date = !is_null($form['start_date']) ? date('Y-m-d H:i:00', strtotime($form['start_date'])) : null;
+                    $end_date   = !is_null($form['end_date']) ? date('Y-m-d H:i:00', strtotime($form['end_date'])) : null;
 
                     $id = Raffle::create([
-                        'name'       => $form['name'],
-                        'raffle_url' => $url,
-                        'start_date' => $form['start_date'],
-                        'end_date'   => $form['end_date'],
+                        'name'        => $form['name'],
+                        'slug'        => $slug,
+                        'description' => $form['description'],
+                        'start_date'  => $start_date,
+                        'end_date'    => $end_date,
                     ]);
 
                     if ($id) {
@@ -81,15 +83,17 @@ class RafflesController extends Controller
 
                     if ($raffle_info->count()) {
                         // regenerate raffle url
-                        $raffle_name = str_replace(' ', '-', strtolower($form['name']));
-                        $base_url = str_replace("/raffle", "", URL::current());
-                        $url = URL::to('/')."/".$raffle_name;
+                        $slug = str_replace(' ', '-', strtolower($form['name']));
+
+                        $start_date = !is_null($form['start_date']) ? date('Y-m-d H:i:00', strtotime($form['start_date'])) : null;
+                        $end_date   = !is_null($form['end_date']) ? date('Y-m-d H:i:00', strtotime($form['end_date'])) : null;
 
                         $raffle = $raffle_info->first();
-                        $raffle->name       = $form['name'];
-                        $raffle->raffle_url = $url;
-                        $raffle->start_date = $form['start_date'];
-                        $raffle->end_date   = $form['end_date'];
+                        $raffle->name        = $form['name'];
+                        $raffle->slug        = $slug;
+                        $raffle->description = $form['description'];
+                        $raffle->start_date  = $start_date;
+                        $raffle->end_date    = $end_date;
 
                         if ($raffle->save()) {
                             $response = ['success' => true, 'message' => 'Raffle updated!'];

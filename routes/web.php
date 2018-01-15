@@ -13,7 +13,8 @@
 
 Route::group(['middleware' => 'web'], function () {
     Route::get('/logout', 'Auth\LoginController@logout');
-    Route::get('/r/{raffle}/{raffle_id}', 'RaffleEntriesController@register')->name('register');
+    Route::get('/registration/{raffle}', 'RaffleEntriesController@registration')->name('registration');
+    Route::post('/r/{raffle}/{raffle_id}', 'RaffleEntriesController@register')->name('register');
     Route::match(['GET', 'POST'], '/login', 'Auth\LoginController@login')->name('login');
 });
 

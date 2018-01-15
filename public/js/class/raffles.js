@@ -1,10 +1,10 @@
 $(function() {
 
-    // $('.datepicker').datepicker({
-    //     autoclose: true,
-    //     todayHighlight: true,
-    //     format: 'mm/dd/yyyy'
-    // });
+    $('.datepicker').datetimepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'mm/dd/yyyy hh:ii P'
+    });
 
     $('.raffle-ended').tooltip({
         placement: 'top',
@@ -52,7 +52,7 @@ $(function() {
 
         $('.modal-body').find('#id').val($(this).data('id'));
         $('.modal-body').find('#raffle-name').val($(this).data('name'));
-        // $('.modal-body').find('#raffle-url').val($(this).data('url'));
+        $('.modal-body').find('#description').val($(this).data('description'));
         $('.modal-body').find('#start-date').val($(this).data('start'));
         $('.modal-body').find('#end-date').val($(this).data('end'));
 

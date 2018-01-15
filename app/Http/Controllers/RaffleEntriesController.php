@@ -17,7 +17,7 @@ class RaffleEntriesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'register']);
+        $this->middleware('auth', ['except' => ['register', 'registration']]);
     }
 
     public function get_raffle_entries(Request $request, $raffle_id)
@@ -45,13 +45,34 @@ class RaffleEntriesController extends Controller
         return response()->json($response);
     }
 
+    public function registration(Request $request, $raffle)
+    {
+        try {
+            if (!Raffle::is_raffle_valid($raffle)) {
+                abort(404, 'Page not found');
+            }
+
+            $raffle_info = Raffle::get_raffle_by_name($raffle);
+
+            if ($raffle_info) {
+                $form_action = URL::to('/').'/r/'.$raffle_info->name.'/'.$raffle_info->raffle_id;
+                print_r($form_action); exit;
+            }
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
+        return view('RaffleEntries.registration');
+    }
+
     public function register(FormRaffleEntryRequest $request, $raffle, $raffle_id)
     {
         $response = ['success' => false];
 
         try {
 
-            if ($request->isMethod('get')) {
+            if ($request->isMethod('post')) {
                 $form = $request->all();
 
                 $code = str_random(10);
