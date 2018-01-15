@@ -44,7 +44,7 @@ class RaffleEntry extends Model
 
             $entries = self::select(DB::Raw('raffle_entries.raffle_entry_id, raffle_entries.email, raffle_entries.code, raffle_entries.created_at, actions.name AS action_name'))
                         ->join('raffles', 'raffles.raffle_id', '=', 'raffle_entries.raffle_id')
-                        ->join('actions', 'actions.action_id', '=', 'raffle_entries.action_id')
+                        ->leftjoin('actions', 'actions.action_id', '=', 'raffle_entries.action_id')
                         ->where([
                             'raffle_entries.raffle_id' => $raffle_id,
                             'raffle_entries.is_active' => 1,
@@ -54,7 +54,7 @@ class RaffleEntry extends Model
                         ->paginate($entries_per_page);
 
             if ($entries->count()) {
-                $data = $entries->get();
+                $data = $entries;
             }
 
         } catch (\Exception $e) {
@@ -73,5 +73,12 @@ class RaffleEntry extends Model
     public static function create_entry($form)
     {
         return self::create($form);
+    }
+
+    public static function check_reaffle_entry($raffle_id, $email_address)
+    {
+        $found = self::where(['raffle_id' => $raffle_id, 'email' => $email_address, 'is_active' => 1, 'deleted_at' => null]);
+
+        return $found->count() ? false : true;
     }
 }

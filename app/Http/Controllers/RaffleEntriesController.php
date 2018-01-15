@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 use App\Raffle;
 use App\RaffleEntry;
 use App\EntryRepo;
 use App\Http\Requests\FormRaffleEntryRequest;
+use App\Mail\RaffleEntryThankyou;
 use DB;
 
 
@@ -25,7 +27,7 @@ class RaffleEntriesController extends Controller
         try {
 
             if ($request->ajax()) {
-
+                
                 $entries = RaffleEntry::get_raffle_entries($raffle_id, $this->per_page);
 
                 $list = view('Partials.RaffleEntries._list', compact('entries'))->render();
@@ -53,6 +55,11 @@ class RaffleEntriesController extends Controller
 
                 $code = str_random(10);
 
+                if (!RaffleEntry::check_reaffle_entry($raffle_id, $form['email'])) {
+                    $response['message'] = "Email address is already registered.";
+                    return response()->json($response);
+                }
+
                 // check if raffle id is valid
                 if (Raffle::is_raffle_id_valid($raffle_id)) {
 
@@ -76,6 +83,9 @@ class RaffleEntriesController extends Controller
                             DB::commit();
 
                             // email raffle entry notification
+                            Mail::to($form['email'])
+                                ->send(new RaffleEntryThankyou()
+                            );
 
                             $response = ['success' => true, 'message' => 'Thank you for joining the raffle.'];
                         } else {

@@ -28,6 +28,12 @@ class RaffleEntryThankyou extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        $from    = env('APP_EMAIL');
+
+        $subject = config('app.name') . ": Thank you for your registration";
+
+        return $this->view('emails.thankyou')
+                    ->from($from)
+                    ->subject($subject);
     }
 }

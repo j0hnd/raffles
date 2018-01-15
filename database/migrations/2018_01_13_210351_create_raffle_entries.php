@@ -16,8 +16,8 @@ class CreateRaffleEntries extends Migration
         Schema::create('raffle_entries', function (Blueprint $table) {
             $table->increments('id');
             $table->uuid('raffle_entry_id')->unique();
-            $table->uuid('raffle_id')->unique();
-            $table->uuid('action_id')->unique()->nullable();
+            $table->uuid('raffle_id');
+            $table->uuid('action_id')->nullable();
             $table->string('email', 100);
             $table->string('code', 10);
             $table->tinyInteger('is_active')->default(1);
