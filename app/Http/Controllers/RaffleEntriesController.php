@@ -27,10 +27,11 @@ class RaffleEntriesController extends Controller
         try {
 
             if ($request->ajax()) {
-                
+
                 $entries = RaffleEntry::get_raffle_entries($raffle_id, $this->per_page);
 
-                $list = view('Partials.RaffleEntries._list', compact('entries'))->render();
+                // $list = view('Partials.RaffleEntries._list', compact('entries'))->render();
+                $list = view('Partials.RaffleEntries._entries', compact('entries'))->render();
 
                 $response = ['success' => true, 'data' => ['list' => $list]];
 

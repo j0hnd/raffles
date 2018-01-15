@@ -29,7 +29,7 @@ $(function() {
                     keyboard: false
                 });
 
-                $('.modal-body').find('#entries-list-container').html(response.data.list);
+                $('.modal-body').find('#raffle-entries-container').html(response.data.list);
             }
         });
     });

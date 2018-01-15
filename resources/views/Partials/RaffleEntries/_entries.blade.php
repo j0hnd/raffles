@@ -1,13 +1,24 @@
-<div class="col-md-12">
-    <table class="table table-striped table-hover">
-        <thead>
-            <th class="col-xs-5">Email</th>
-            <th class="col-xs-2">Code</th>
-            <th class="col-xs-3">Action</th>
-            <th class="col-xs-2 text-center">Date Joined</th>
-        </thead>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-hover">
+            <thead>
+                <th class="col-xs-5">Email</th>
+                <th class="col-xs-2">Code</th>
+                <th class="col-xs-3">Action</th>
+                <th class="col-xs-2 text-center">Date Joined</th>
+            </thead>
 
-        <tbody id="entries-list-container">
-        </tbody>
-    </table>
+            <tbody id="raffle-entries-container">
+                @include('Partials.RaffleEntries._list', compact('entries'))
+            </tbody>
+
+            @if (isset($entries))
+            <tfoot>
+                <tr>
+                    <td colspan="4">{{ $entries->links() }}</td>
+                </tr>
+            </tfoot>
+            @endif
+        </table>
+    </div>
 </div>

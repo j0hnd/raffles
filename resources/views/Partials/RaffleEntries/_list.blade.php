@@ -1,4 +1,4 @@
-@if ($entries)
+@if (isset($entries))
     @foreach ($entries as $entry)
     <tr data-id="{{ $entry->raffle_entry_id }}">
         <td>{{ $entry->email }}</td>

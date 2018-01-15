@@ -68,16 +68,11 @@
       </div>
 
       <div class="modal-body">
-        <div id="raffle-entries-container">
-          <div class="row">
-              @include('Partials.RaffleEntries._entries')
-          </div>
-        </div>
+        <div id="raffle-entries-container"> </div>
       </div>
 
       <div class="modal-footer">
         <button type="button" id="" class="btn btn-link" data-dismiss="modal">Close</button>
-        <!-- <button type="button" id="toggle-update" class="btn btn-primary">Update</button> -->
       </div>
 
     </div><!-- /.modal-content -->
