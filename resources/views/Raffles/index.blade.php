@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th class="col-md-3">Raffle Name</th>

@@ -3,6 +3,8 @@
         @php
             if (strtotime('now') > strtotime($raffle['end_date'])) {
                 $tr_background = "bg-danger raffle-ended";
+            } elseif (strtotime('now') >= strtotime($raffle['start_date']) and strtotime('now') <= strtotime($raffle['end_date'])) {
+                $tr_background = "bg-success raffle-ongoing";
             } else {
                 $tr_background = "";
             }
