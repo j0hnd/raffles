@@ -69,9 +69,9 @@ class Raffle extends AppModel
         return $results;
     }
 
-    public static function get_raffle_by_name($raffle_name)
+    public static function get_raffle_by_slug($slug)
     {
-        return self::where(['name' => $raffle_name, 'is_active' => 1, 'deleted_at' => null])->first();
+        return self::where(['slug' => $slug, 'is_active' => 1, 'deleted_at' => null])->first();
     }
 
     public static function is_raffle_id_valid($raffle_id)
@@ -81,9 +81,6 @@ class Raffle extends AppModel
 
     public static function is_raffle_valid($raffle_name)
     {
-
-        $raffle_info = self::where(['name' => $raffle_name, 'is_active' => 1, 'deleted_at' => null])->first();
-        print_r($raffle_info); exit;
-        // return self::where(['name' => $raffle_name, 'is_active' => 1, 'deleted_at' => null])->count() ? true : false;
+        return self::where(['slug' => $raffle_name, 'is_active' => 1, 'deleted_at' => null])->count() ?  : false;
     }
 }

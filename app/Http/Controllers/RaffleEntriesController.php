@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\URL;
 
 use App\Raffle;
 use App\RaffleEntry;
@@ -11,6 +12,7 @@ use App\EntryRepo;
 use App\Http\Requests\FormRaffleEntryRequest;
 use App\Mail\RaffleEntryThankyou;
 use DB;
+use DateTime;
 
 
 class RaffleEntriesController extends Controller
@@ -52,18 +54,23 @@ class RaffleEntriesController extends Controller
                 abort(404, 'Page not found');
             }
 
-            $raffle_info = Raffle::get_raffle_by_name($raffle);
+            $raffle_info = Raffle::get_raffle_by_slug($raffle);
 
             if ($raffle_info) {
-                $form_action = URL::to('/').'/r/'.$raffle_info->name.'/'.$raffle_info->raffle_id;
-                print_r($form_action); exit;
+                $form_action    = URL::to('/').'/r/'.$raffle_info->slug.'/'.$raffle_info->raffle_id;
+
+                // calculate days remaining
+                $end_date       = new DateTime($raffle_info->end_date);
+                $current_date   = new DateTime('now');
+                $diff           = $current_date->diff($end_date)->format("%a");
+                $days_remaining = intval($diff);
             }
 
         } catch (\Exception $e) {
             throw $e;
         }
 
-        return view('RaffleEntries.registration');
+        return view('RaffleEntries.registration', compact('raffle_info', 'form_action', 'days_remaining'));
     }
 
     public function register(FormRaffleEntryRequest $request, $raffle, $raffle_id)
@@ -109,13 +116,17 @@ class RaffleEntriesController extends Controller
                                 ->send(new RaffleEntryThankyou()
                             );
 
-                            $response = ['success' => true, 'message' => 'Thank you for joining the raffle.'];
+                            // $response = ['success' => true, 'message' => 'Thank you for joining the raffle.'];
                         } else {
                             DB::rollback();
+
+                            abort(500, 'Something went wrong!');
                         }
 
                     } else {
                         DB::rollback();
+
+                        abort(500, 'Something went wrong!');
                     }
 
                 }
@@ -126,6 +137,6 @@ class RaffleEntriesController extends Controller
         }
 
 
-        return response()->json($response);
+        return view('RaffleEntries.thankyou');
     }
 }

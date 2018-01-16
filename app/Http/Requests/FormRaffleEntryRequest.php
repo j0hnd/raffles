@@ -33,15 +33,16 @@ class FormRaffleEntryRequest extends FormRequest
 
             case "POST":
                 return [
-                    'name'      => 'required|email|unique:raffle_entries',
-                    'raffle_id' => 'required'
+                    'email'                => 'required|email|unique:raffle_entries',
+                    'raffle_id'            => 'required',
+                    'g-recaptcha-response' => 'required|recaptcha'
                 ];
                 break;
 
             case "PUT":
             case "PATCH":
                 return [
-                    'name'      => 'required|email',
+                    'email'     => 'required|email',
                     'raffle_id' => 'required'
                 ];
                 break;
