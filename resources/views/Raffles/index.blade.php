@@ -37,4 +37,16 @@
 
 @section('custom-js')
 <script src="{{ url('js/class/raffles.js') }}" type="text/javascript"></script>
+<script src="{{ url('js/plugins/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+<script type="text/javascript">
+tinymce.init({
+    selector:'textarea',
+    menubar: false,
+    setup: function (editor) {
+        editor.on('change', function () {
+            tinymce.triggerSave();
+        });
+    }
+});
+</script>
 @endsection

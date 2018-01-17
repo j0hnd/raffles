@@ -12,6 +12,7 @@
 */
 
 Route::group(['middleware' => 'web'], function () {
+    Route::get('/login', 'Auth\LoginController@login');
     Route::get('/logout', 'Auth\LoginController@logout');
     Route::get('/{raffle}', 'RaffleEntriesController@registration')->name('registration');
     Route::post('/r/{raffle}/{raffle_id}', 'RaffleEntriesController@register')->name('register');
