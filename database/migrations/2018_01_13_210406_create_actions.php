@@ -16,12 +16,13 @@ class CreateActions extends Migration
         Schema::create('actions', function (Blueprint $table) {
             $table->increments('id');
             $table->uuid('action_id')->unique();
+            $table->uuid('raffle_entry_id');
             $table->string('name', 100);
             $table->string('value', 100);
             $table->tinyInteger('is_active')->default(1);
             $table->timestamps();
 
-            $table->index(['name', 'is_active']);
+            $table->index(['raffle_entry_id', 'name', 'is_active']);
         });
     }
 

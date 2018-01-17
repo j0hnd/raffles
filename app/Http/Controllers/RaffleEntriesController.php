@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\URL;
 
 use App\Raffle;
 use App\RaffleEntry;
-use App\EntryRepo;
+use App\RaffleAction;
 use App\Http\Requests\FormRaffleEntryRequest;
 use App\Mail\RaffleEntryThankyou;
 use DB;
@@ -32,7 +32,6 @@ class RaffleEntriesController extends Controller
 
                 $entries = RaffleEntry::get_raffle_entries($raffle_id, $this->per_page);
 
-                // $list = view('Partials.RaffleEntries._list', compact('entries'))->render();
                 $list = view('Partials.RaffleEntries._entries', compact('entries'))->render();
 
                 $response = ['success' => true, 'data' => ['list' => $list]];
@@ -101,22 +100,19 @@ class RaffleEntriesController extends Controller
                     DB::beginTransaction();
 
                     if ($id = RaffleEntry::create_entry($form)) {
-                        $source = isset($form['source']) ? $form['source'] : 'web';
-
                         $entry_form = [
                             'raffle_entry_id' => $id->raffle_entry_id,
-                            'source'          => $source
+                            'name'            => "Sign up for the contest",
+                            'value'           => 1
                         ];
 
-                        if (EntryRepo::save_entry($entry_form)) {
+                        if (RaffleAction::save_entry($entry_form)) {
                             DB::commit();
 
                             // email raffle entry notification
                             Mail::to($form['email'])
                                 ->send(new RaffleEntryThankyou()
                             );
-
-                            // $response = ['success' => true, 'message' => 'Thank you for joining the raffle.'];
                         } else {
                             DB::rollback();
 
