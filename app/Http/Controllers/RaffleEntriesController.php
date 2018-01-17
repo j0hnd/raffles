@@ -50,7 +50,16 @@ class RaffleEntriesController extends Controller
     {
         try {
             if (!Raffle::is_raffle_valid($raffle)) {
-                abort(404, 'Page not found');
+                abort(404);
+            }
+
+            // get raffle info
+            $raffle_info = Raffle::get_raffle_by_slug($raffle);
+
+            // check if raffle is not ended
+            if (strtotime('now') >= strtotime($raffle_info->start_date) and strtotime('now') <= strtotime($raffle_info->end_date)) {
+            } else {
+                abort(404, 'Raffle is already expired!');
             }
 
             $raffle_info = Raffle::get_raffle_by_slug($raffle);
