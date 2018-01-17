@@ -109,10 +109,17 @@ class RaffleEntriesController extends Controller
                         if (RaffleAction::save_entry($entry_form)) {
                             DB::commit();
 
+                            $raffle_info = Raffle::get_raffle_info($raffle_id);
+
+                            $mail_data = [
+                                'raffle_code' => $code,
+                                'raffle_name' => $raffle_info->name,
+                                'end_date'    => $raffle_info->end_date
+                            ];
+
                             // email raffle entry notification
                             Mail::to($form['email'])
-                                ->send(new RaffleEntryThankyou()
-                            );
+                                ->send(new RaffleEntryThankyou($mail_data));
                         } else {
                             DB::rollback();
 

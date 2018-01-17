@@ -70,6 +70,11 @@ class Raffle extends AppModel
         return $results;
     }
 
+    public static function get_raffle_info($raffle_id)
+    {
+        return self::where(['raffle_id' => $raffle_id, 'is_active' => 1, 'deleted_at' => null])->first();
+    }
+
     public static function get_raffle_by_slug($slug)
     {
         return self::where(['slug' => $slug, 'is_active' => 1, 'deleted_at' => null])->first();

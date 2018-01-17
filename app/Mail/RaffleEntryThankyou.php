@@ -11,14 +11,17 @@ class RaffleEntryThankyou extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $data = null;
+
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -34,6 +37,7 @@ class RaffleEntryThankyou extends Mailable
 
         return $this->view('emails.thankyou')
                     ->from($from)
+                    ->with($this->data)
                     ->subject($subject);
     }
 }
