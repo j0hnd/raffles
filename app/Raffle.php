@@ -46,7 +46,8 @@ class Raffle extends AppModel
         try {
 
             $object = self::where([ 'is_active' => 1, 'deleted_at' => null ])
-                        ->orderBy('created_at', 'desc')
+                        ->select(DB::raw("raffle_id, name, slug, description, start_date, end_date"))
+                        ->orderBy(DB::raw("IF(NOW() BETWEEN start_date AND end_date, '1', IF(NOW() > end_date, '2', 99999))"))
                         ->paginate($raffle_per_page);
 
             if ($object->count()) {
